@@ -1,0 +1,123 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        
+       
+        final int MIN = 1; 
+        final int MAX = 100; 
+        final int MAX_ATTEMPTS = 5; 
+        int score = 0; // Track user's score
+        boolean playAgain = true;
+
+        System.out.println("=== Welcome to the Number Guessing Game! ===");
+        
+        
+          while (playAgain) {
+           
+            int targetNumber = random.nextInt(MAX - MIN + 1) + MIN;
+            int attempts = 0;
+            boolean guessedCorrectly = false;
+
+       System.out.println("\nI have picked a number between " + MIN + " and " + MAX + ".");
+    
+       System.out.println("You have " + MAX_ATTEMPTS + " attempts to guess it!");
+
+           
+            while (attempts < MAX_ATTEMPTS) {
+                System.out.print("Enter your guess: ");
+                int userGuess = scanner.nextInt();
+                attempts++;
+
+               
+                if (userGuess == targetNumber) {
+
+               System.out.println("Congratulations! You've guessed the number correctly in " + attempts + " attempts.");
+
+                    guessedCorrectly = true;
+                    score += (MAX_ATTEMPTS - attempts + 1);
+                      break;
+                } else if (userGuess < targetNumber) {
+                    System.out.println("Too low! Try again.");
+                } else {
+                    System.out.println("Too high! Try again.");
+                }
+
+                System.out.println("Attempts left: " + (MAX_ATTEMPTS - attempts));
+            }
+
+          
+             if (!guessedCorrectly) {
+                System.out.println("Sorry, you've used all your attempts. The correct number was: " + targetNumber);
+            }
+
+            
+            System.out.print("\nDo you want to play again? (yes/no): ");
+            scanner.nextLine(); 
+            String response = scanner.nextLine();
+            playAgain = response.equalsIgnoreCase("yes");
+        }
+
+       
+        System.out.println("\n=== Game Over ===");
+        System.out.println("Your final score is: " + score);
+        System.out.println("Thank you for playing!");
+
+                scanner.close();
+    }
+}
+
+
+
+
+
+
+OUTPUT:
+
+=== Welcome to the Number Guessing Game! ===
+
+I have picked a number between 1 and 100.
+You have 5 attempts to guess it!
+Enter your guess: 50
+Too low! Try again.
+Attempts left: 4
+Enter your guess: 75
+Too high! Try again.
+Attempts left: 3
+Enter your guess: 60
+Congratulations! You've guessed the number correctly in 3 attempts.
+
+Do you want to play again? (yes/no): yes
+
+I have picked a number between 1 and 100.
+You have 5 attempts to guess it!
+Enter your guess: 45
+Too low! Try again.
+Attempts left: 4
+Enter your guess: 95
+Too high! Try again.
+Attempts left: 3
+Enter your guess: 75
+Too low! Try again.
+Attempts left: 2
+Enter your guess: 85
+Too high! Try again.
+Attempts left: 1
+Enter your guess: 80
+Sorry, you've used all your attempts. The correct number was: 82
+
+Do you want to play again? (yes/no): no
+
+=== Game Over ===
+Your final score is: 3
+Thank you for playing!
+
+
+
+
+
+
+
